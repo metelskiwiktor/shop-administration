@@ -37,8 +37,17 @@ public class CategoryServiceImplTest {
         verify(categoryRepositoryJpa, times(1)).save(any());
     }
 
+    @Test
     public void edit(){
-        String oldCategory = null;
-        categoryService.edit(oldCategory, categoryDTO);
+        when(categoryRepositoryJpa.getCategoryByName(category.getName())).thenReturn(category);
+        categoryService.edit(category.getName(), categoryDTO);
+        verify(categoryRepositoryJpa).saveAndFlush(any());
+    }
+
+    @Test
+    public void delete(){
+        when(categoryRepositoryJpa.getCategoryByName(category.getName())).thenReturn(category);
+        categoryService.delete(category.getName());
+        verify(categoryRepositoryJpa).delete(category);
     }
 }
