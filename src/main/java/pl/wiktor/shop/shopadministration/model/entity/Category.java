@@ -4,13 +4,13 @@ package pl.wiktor.shop.shopadministration.model.entity;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "category")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column
+    @Column(unique = true)
     private String name;
 
     public Category() {
@@ -30,5 +30,9 @@ public class Category {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
