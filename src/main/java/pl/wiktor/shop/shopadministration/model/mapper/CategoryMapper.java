@@ -6,7 +6,6 @@ import pl.wiktor.shop.shopadministration.model.entity.Category;
 public abstract class CategoryMapper {
     public static Category map(CategoryDTO categoryDTO){
         Category category = new Category();
-        category.setId(categoryDTO.getId());
         category.setName(categoryDTO.getName());
         return category;
     }

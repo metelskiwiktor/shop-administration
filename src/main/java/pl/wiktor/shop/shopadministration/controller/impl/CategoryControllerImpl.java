@@ -14,7 +14,7 @@ import pl.wiktor.shop.shopadministration.service.CategoryService;
 
 import java.util.List;
 
-@RestController()
+@RestController
 @RequestMapping(CategoryControllerImpl.CATEGORY)
 public class CategoryControllerImpl implements CategoryController {
     public static final String CATEGORY = "category/";
