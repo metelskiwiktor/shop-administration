@@ -3,6 +3,7 @@ package pl.wiktor.shop.shopadministration.model.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 @Table(name = "item")
 @Entity
@@ -17,7 +18,7 @@ public class Item {
     @ManyToOne
     private Category category;
     @ManyToMany
-    private List<Tag> tags;
+    private Set<Tag> tags;
     @Column(unique = true)
     private String name;
     @OneToOne(cascade = CascadeType.ALL)
@@ -27,7 +28,7 @@ public class Item {
     public Item() {
     }
 
-    public Item(BigDecimal basicPrice, Category category, List<Tag> tags, String name, Stock stock) {
+    public Item(BigDecimal basicPrice, Category category, Set<Tag> tags, String name, Stock stock) {
         this.basicPrice = basicPrice;
         this.category = category;
         this.tags = tags;
@@ -59,7 +60,7 @@ public class Item {
         return stock;
     }
 
-    public List<Tag> getTags() {
+    public Set<Tag> getTags() {
         return tags;
     }
 
@@ -75,7 +76,7 @@ public class Item {
         this.category = category;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
 

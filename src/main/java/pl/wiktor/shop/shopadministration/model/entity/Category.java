@@ -8,8 +8,9 @@ import javax.persistence.*;
 @Entity
 @Table
 public class Category {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     @Column(unique = true)
     private String name;
 
