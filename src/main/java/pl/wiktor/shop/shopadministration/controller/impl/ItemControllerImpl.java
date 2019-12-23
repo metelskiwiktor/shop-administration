@@ -31,6 +31,7 @@ public class ItemControllerImpl {
     @Transactional
     @PostMapping(value = "add/", consumes = "application/json")
     public void add(@RequestBody Item item){
+        System.out.println(item);
         itemRepositoryJpa.saveAndFlush(item);
     }
 
