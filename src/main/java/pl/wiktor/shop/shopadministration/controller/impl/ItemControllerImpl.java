@@ -9,11 +9,11 @@ import pl.wiktor.shop.shopadministration.model.entity.Tag;
 import pl.wiktor.shop.shopadministration.model.entity.Category;
 import pl.wiktor.shop.shopadministration.repository.CategoryRepositoryJpa;
 import pl.wiktor.shop.shopadministration.repository.ItemRepositoryJpa;
+import pl.wiktor.shop.shopadministration.repository.TagRepositoryJpa;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Transactional
 @RestController
@@ -21,23 +21,24 @@ import java.util.List;
 public class ItemControllerImpl {
     private ItemRepositoryJpa itemRepositoryJpa;
     private CategoryRepositoryJpa categoryRepositoryJpa;
+    private TagRepositoryJpa tagRepositoryJpa;
 
     @Autowired
-    public ItemControllerImpl(ItemRepositoryJpa itemRepositoryJpa, CategoryRepositoryJpa categoryRepositoryJpa) {
+    public ItemControllerImpl(ItemRepositoryJpa itemRepositoryJpa, CategoryRepositoryJpa categoryRepositoryJpa, TagRepositoryJpa tagRepositoryJpa) {
         this.itemRepositoryJpa = itemRepositoryJpa;
         this.categoryRepositoryJpa = categoryRepositoryJpa;
+        this.tagRepositoryJpa = tagRepositoryJpa;
     }
 
     @Transactional
     @PostMapping(value = "add/", consumes = "application/json")
     public void add(@RequestBody Item item){
-        System.out.println(item);
         itemRepositoryJpa.saveAndFlush(item);
     }
 
     @GetMapping("get/")
     public Item get(){
-        Item item = new Item(new BigDecimal("200"), new Category("programowanie w Java"), Arrays.asList(new Tag("Java")), "Książka o Javie", new Stock(12));
+        Item item = new Item(new BigDecimal("200"), new Category("programowanie w Java"), new HashSet<>(Arrays.asList(new Tag("Java"), new Tag("SQL"))), "Książka o Javie", new Stock(12));
         //BigDecimal basicPrice, Category category, List<Tag> tags, String name, Stock stock)
         item.setDiscount(new Discount(5, new BigDecimal(20)));
         return item;
