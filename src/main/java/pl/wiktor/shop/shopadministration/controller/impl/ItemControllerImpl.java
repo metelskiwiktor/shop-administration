@@ -33,10 +33,6 @@ public class ItemControllerImpl {
     @Transactional
     @PostMapping(value = "add/", consumes = "application/json")
     public void add(@RequestBody Item item){
-//        item.setCategory(categoryRepositoryJpa.getCategoryByName(item.getCategory().getName()));
-//        Set<Tag> tags = new HashSet<>();
-//        item.getTags().forEach( tag -> tags.add(tagRepositoryJpa.getTagByName(tag.getName())));
-//        item.setTags(tags);
         itemRepositoryJpa.saveAndFlush(item);
     }
 

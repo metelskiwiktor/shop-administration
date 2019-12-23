@@ -87,4 +87,17 @@ public class Item {
     public void setStock(Stock stock) {
         this.stock = stock;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", basicPrice=" + basicPrice +
+                ", discount=" + discount +
+                ", category=" + category +
+                ", tags=" + tags +
+                ", name='" + name + '\'' +
+                ", stock=" + stock +
+                '}';
+    }
 }

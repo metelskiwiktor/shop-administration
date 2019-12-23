@@ -29,4 +29,13 @@ public class Stock {
     public int getStockLeft() {
         return stockLeft;
     }
+
+    @Override
+    public String toString() {
+        return "Stock{" +
+                "id=" + id +
+                ", stocks=" + stocks +
+                ", stockLeft=" + stockLeft +
+                '}';
+    }
 }
