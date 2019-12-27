@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CategoryService {
     void add(CategoryDTO categoryDTO);
-    void edit(String oldCategory, CategoryDTO categoryDTO);
-    void delete(String name);
+    void edit(int idOldCategory, CategoryDTO categoryDTO);
+    void delete(int id);
     List<Category> getAll();
 }

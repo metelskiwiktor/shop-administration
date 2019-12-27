@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.wiktor.shop.shopadministration.controller.CategoryController;
 import pl.wiktor.shop.shopadministration.model.dto.request.CategoryDTO;
-import pl.wiktor.shop.shopadministration.model.dto.request.EditCategoryRequestDTO;
 import pl.wiktor.shop.shopadministration.model.entity.Category;
 import pl.wiktor.shop.shopadministration.service.CategoryService;
 
@@ -43,29 +42,29 @@ public class CategoryControllerImpl implements CategoryController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(value = EDIT+"{oldCategory}", consumes = "application/json")
-    public ResponseEntity<String>  editCategory(@PathVariable String oldCategory, @RequestBody CategoryDTO categoryDTO){
-        logger.info("Trying to edit category, old category = '{}', new category = '{}'",
-                oldCategory,
+    @PutMapping(value = EDIT+ "{idOldCategory}", consumes = "application/json")
+    public ResponseEntity<String>  editCategory(@PathVariable int idOldCategory, @RequestBody CategoryDTO categoryDTO){
+        logger.info("Trying to edit category, old category id = '{}', new category name = '{}'",
+                idOldCategory,
                 categoryDTO.getName()
         );
 
-        categoryService.edit(oldCategory, categoryDTO);
+        categoryService.edit(idOldCategory, categoryDTO);
 
-        logger.info("Category from name = '{}' successfully changed to name = '{}'",
-                oldCategory,
+        logger.info("Category from id = '{}' successfully changed to name = '{}'",
+                idOldCategory,
                 categoryDTO.getName()
         );
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value = DELETE+NAME)
-    public ResponseEntity<String> deleteCategory(@PathVariable String name){
-        logger.info("Trying to delete category = '{}'", name);
+    @GetMapping(value = DELETE+"{id}")
+    public ResponseEntity<String> deleteCategory(@PathVariable int id){
+        logger.info("Trying to delete category, id = '{}'", id);
 
-        categoryService.delete(name);
+        categoryService.delete(id);
 
-        logger.info("Successful deleted category = '{}'", name);
+        logger.info("Successful deleted category, id = '{}'", id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -75,7 +74,7 @@ public class CategoryControllerImpl implements CategoryController {
 
         List<Category> all = categoryService.getAll();
 
-        logger.info("Successful got all categories");
+        logger.info("Successful returned all categories");
         return ResponseEntity.ok(all);
     }
 }

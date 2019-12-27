@@ -1,15 +1,10 @@
 package pl.wiktor.shop.shopadministration.service.impl;
 
-import org.hibernate.exception.ConstraintViolationException;
-import org.postgresql.util.PSQLException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import pl.wiktor.shop.shopadministration.exception.InvalidCategoryNameException;
 import pl.wiktor.shop.shopadministration.model.dto.request.CategoryDTO;
-import pl.wiktor.shop.shopadministration.model.dto.request.EditCategoryRequestDTO;
 import pl.wiktor.shop.shopadministration.model.entity.Category;
 import pl.wiktor.shop.shopadministration.model.mapper.CategoryMapper;
 import pl.wiktor.shop.shopadministration.repository.CategoryRepositoryJpa;
@@ -33,15 +28,14 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.save(category);
     }
 
-    public void edit(String oldCategory, CategoryDTO categoryDTO) throws NullPointerException{
-        Category category = categoryRepository.getCategoryByName(oldCategory);
+    public void edit(int idOldCategory, CategoryDTO categoryDTO) throws NullPointerException{
+        Category category = categoryRepository.getOne(idOldCategory);
         category.setName(categoryDTO.getName());
         categoryRepository.saveAndFlush(category);
     }
 
-    public void delete(String name) throws IllegalArgumentException{
-        Category category = categoryRepository.getCategoryByName(name);
-        categoryRepository.delete(category);
+    public void delete(int id) throws EmptyResultDataAccessException {
+        categoryRepository.deleteById(id);
     }
 
     public List<Category> getAll(){
