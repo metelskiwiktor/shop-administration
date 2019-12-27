@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface CategoryController {
     ResponseEntity<String> addCategory(CategoryDTO categoryDTO);
-    ResponseEntity<String> editCategory(String oldCategory, CategoryDTO categoryDTO);
-    ResponseEntity<String> deleteCategory(String name);
+    ResponseEntity<String> editCategory(int oldCategory, CategoryDTO categoryDTO);
+    ResponseEntity<String> deleteCategory(int id);
     ResponseEntity<List<Category>> getAll();
 }
