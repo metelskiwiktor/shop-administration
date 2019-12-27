@@ -1,12 +1,13 @@
 package pl.wiktor.shop.shopadministration.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.wiktor.shop.shopadministration.model.dto.request.ItemDTO;
 import pl.wiktor.shop.shopadministration.model.entity.Discount;
 import pl.wiktor.shop.shopadministration.model.entity.Item;
 import pl.wiktor.shop.shopadministration.model.entity.Stock;
-import pl.wiktor.shop.shopadministration.model.entity.Tag;
-import pl.wiktor.shop.shopadministration.model.entity.Category;
+import pl.wiktor.shop.shopadministration.model.mapper.ItemMapper;
 import pl.wiktor.shop.shopadministration.repository.CategoryRepositoryJpa;
 import pl.wiktor.shop.shopadministration.repository.ItemRepositoryJpa;
 import pl.wiktor.shop.shopadministration.repository.TagRepositoryJpa;
@@ -32,13 +33,15 @@ public class ItemControllerImpl {
 
     @Transactional
     @PostMapping(value = "add/", consumes = "application/json")
-    public void add(@RequestBody Item item){
-        itemRepositoryJpa.saveAndFlush(item);
+    public ResponseEntity<ItemDTO> add(@RequestBody ItemDTO item){
+        Item item1 = ItemMapper.map(item);
+        itemRepositoryJpa.saveAndFlush(item1);
+        return ResponseEntity.ok(item);
     }
 
     @GetMapping("get/")
-    public Item get(){
-        Item item = new Item(new BigDecimal("200"), new Category("programowanie w Java"), new HashSet<>(Arrays.asList(new Tag("Java"), new Tag("SQL"))), "Książka o Javie", new Stock(12));
+    public ItemDTO get(){
+        ItemDTO item = new ItemDTO(new BigDecimal("200"), new LinkedHashSet<>(Arrays.asList(28,29)), new LinkedHashSet<>(Arrays.asList(30,31)), "Książka o Javie", new Stock(12));
         //BigDecimal basicPrice, Category category, List<Tag> tags, String name, Stock stock)
         item.setDiscount(new Discount(5, new BigDecimal(20)));
         return item;

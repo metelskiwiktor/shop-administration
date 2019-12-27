@@ -1,8 +1,6 @@
 package pl.wiktor.shop.shopadministration.model.entity;
 
 
-import org.hibernate.annotations.ManyToAny;
-
 import javax.persistence.*;
 
 @Entity

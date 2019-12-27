@@ -7,15 +7,25 @@ import pl.wiktor.shop.shopadministration.model.entity.Category;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 public class ItemDTO {
     private int id;
     private BigDecimal basicPrice;
     private Discount discount;
-    private Category category;
-    private List<Tag> tags;
+    private Set<Integer> idCategories;
+    private Set<Integer> idTags;
     private String name;
     private Stock stock;
+
+    public ItemDTO(BigDecimal basicPrice, Set<Integer> idCategories, Set<Integer> idTags, String name, Stock stock) {
+        this.id = id;
+        this.basicPrice = basicPrice;
+        this.idCategories = idCategories;
+        this.idTags = idTags;
+        this.name = name;
+        this.stock = stock;
+    }
 
     public ItemDTO() {
     }
@@ -44,20 +54,20 @@ public class ItemDTO {
         this.discount = discount;
     }
 
-    public Category getCategory() {
-        return category;
+    public Set<Integer> getIdCategories() {
+        return idCategories;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setIdCategories(Set<Integer> idCategories) {
+        this.idCategories = idCategories;
     }
 
-    public List<Tag> getTags() {
-        return tags;
+    public Set<Integer> getIdTags() {
+        return idTags;
     }
 
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
+    public void setIdTags(Set<Integer> idTags) {
+        this.idTags = idTags;
     }
 
     public String getName() {
