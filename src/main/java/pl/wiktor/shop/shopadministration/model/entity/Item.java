@@ -22,17 +22,19 @@ public class Item {
     private Set<Tag> tags;
     @OneToOne(cascade = CascadeType.ALL)
     private Stock stock;
-
+    @ManyToMany
+    private Set<Author> authors;
 
     public Item() {
     }
 
-    public Item(BigDecimal basicPrice, Set<Category> categories, Set<Tag> tags, String name, Stock stock) {
+    public Item(BigDecimal basicPrice, Set<Category> categories, Set<Tag> tags, String name, Stock stock, Set<Author> authors) {
         this.basicPrice = basicPrice;
         this.categories = categories;
         this.tags = tags;
         this.name = name;
         this.stock = stock;
+        this.authors = authors;
     }
 
     public void setDiscount(Discount discount) {
@@ -85,6 +87,18 @@ public class Item {
 
     public void setStock(Stock stock) {
         this.stock = stock;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<Author> authors) {
+        this.authors = authors;
     }
 
     @Override

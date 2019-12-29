@@ -10,12 +10,9 @@ public class Stock {
     private int id;
     @Column
     private int stocks;
-    @Column
-    private int stockLeft;
 
     public Stock(int stocks) {
         this.stocks = stocks;
-        stockLeft = stocks;
     }
 
     public Stock() {
@@ -26,16 +23,11 @@ public class Stock {
         return stocks;
     }
 
-    public int getStockLeft() {
-        return stockLeft;
-    }
-
     @Override
     public String toString() {
         return "Stock{" +
                 "id=" + id +
                 ", stocks=" + stocks +
-                ", stockLeft=" + stockLeft +
                 '}';
     }
 }
