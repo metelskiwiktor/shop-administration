@@ -19,8 +19,7 @@ public class CategoryControllerImpl implements CategoryController {
     public static final String CATEGORY = "category/";
     public static final String DELETE = "delete/";
     public static final String ADD = "add/";
-    public static final String EDIT = "edit/";
-    public static final String NAME = "name/";
+    public static final String UPDATE = "update/";
     public static final String GET_ALL = "getAll/";
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -33,7 +32,7 @@ public class CategoryControllerImpl implements CategoryController {
     }
 
     @GetMapping(value = ADD, consumes = "application/json")
-    public ResponseEntity<String> addCategory(@RequestBody CategoryDTO categoryDTO){
+    public ResponseEntity<String> addCategory(@RequestBody CategoryDTO categoryDTO) {
         logger.info("Trying to add category = '{}'", categoryDTO);
 
         categoryService.add(categoryDTO);
@@ -42,24 +41,24 @@ public class CategoryControllerImpl implements CategoryController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(value = EDIT+ "{idOldCategory}", consumes = "application/json")
-    public ResponseEntity<String>  editCategory(@PathVariable int idOldCategory, @RequestBody CategoryDTO categoryDTO){
-        logger.info("Trying to edit category, old category id = '{}', new category name = '{}'",
+    @PutMapping(value = UPDATE + "{idOldCategory}", consumes = "application/json")
+    public ResponseEntity<String> editCategory(@PathVariable int idOldCategory, @RequestBody CategoryDTO categoryDTO) {
+        logger.info("Trying to edit category, old category id = '{}', new category = '{}'",
                 idOldCategory,
                 categoryDTO.getName()
         );
 
         categoryService.edit(idOldCategory, categoryDTO);
 
-        logger.info("Category from id = '{}' successfully changed to name = '{}'",
+        logger.info("Category from id = '{}' successfully changed to = '{}'",
                 idOldCategory,
                 categoryDTO.getName()
         );
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value = DELETE+"{id}")
-    public ResponseEntity<String> deleteCategory(@PathVariable int id){
+    @GetMapping(value = DELETE + "{id}")
+    public ResponseEntity<String> deleteCategory(@PathVariable int id) {
         logger.info("Trying to delete category, id = '{}'", id);
 
         categoryService.delete(id);
@@ -69,7 +68,7 @@ public class CategoryControllerImpl implements CategoryController {
     }
 
     @GetMapping(value = GET_ALL)
-    public ResponseEntity<List<Category>> getAll(){
+    public ResponseEntity<List<Category>> getAll() {
         logger.info("Trying to get all categories");
 
         List<Category> all = categoryService.getAll();

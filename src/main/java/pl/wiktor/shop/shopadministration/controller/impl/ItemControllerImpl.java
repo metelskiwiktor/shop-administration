@@ -47,7 +47,7 @@ public class ItemControllerImpl {
                 new LinkedHashSet<>(Arrays.asList(new Tag("SQL"), new Tag("Java"))),
                 "Książka o Javie",
                 new Stock(12),
-                new LinkedHashSet<>(Collections.singletonList(new Author("Wiktor Metelski","O autorze")))
+                new LinkedHashSet<>(Collections.singletonList(new Author("Robert C. Martin","O autorze")))
         );
     }
 
