@@ -1,12 +1,11 @@
 package pl.wiktor.shop.shopadministration.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.wiktor.shop.shopadministration.model.entity.Discount;
-import pl.wiktor.shop.shopadministration.model.entity.Item;
-import pl.wiktor.shop.shopadministration.model.entity.Stock;
-import pl.wiktor.shop.shopadministration.model.entity.Tag;
-import pl.wiktor.shop.shopadministration.model.entity.Category;
+import pl.wiktor.shop.shopadministration.model.dto.request.ItemDTO;
+import pl.wiktor.shop.shopadministration.model.entity.*;
+import pl.wiktor.shop.shopadministration.model.mapper.ItemMapper;
 import pl.wiktor.shop.shopadministration.repository.CategoryRepositoryJpa;
 import pl.wiktor.shop.shopadministration.repository.ItemRepositoryJpa;
 import pl.wiktor.shop.shopadministration.repository.TagRepositoryJpa;
@@ -17,7 +16,7 @@ import java.util.*;
 
 @Transactional
 @RestController
-@RequestMapping("item/")
+@RequestMapping("/item")
 public class ItemControllerImpl {
     private ItemRepositoryJpa itemRepositoryJpa;
     private CategoryRepositoryJpa categoryRepositoryJpa;
@@ -31,26 +30,34 @@ public class ItemControllerImpl {
     }
 
     @Transactional
-    @PostMapping(value = "add/", consumes = "application/json")
-    public void add(@RequestBody Item item){
-        itemRepositoryJpa.saveAndFlush(item);
+    @PostMapping(value = "/add", consumes = "application/json")
+    public ResponseEntity<ItemDTO> add(@RequestBody ItemDTO itemDTO){
+        Item item = ItemMapper.map(itemDTO);
+        itemRepositoryJpa.save(item);
+        return ResponseEntity.ok(itemDTO);
     }
 
-    @GetMapping("get/")
-    public Item get(){
-        Item item = new Item(new BigDecimal("200"), new Category("programowanie w Java"), new HashSet<>(Arrays.asList(new Tag("Java"), new Tag("SQL"))), "Książka o Javie", new Stock(12));
+    @GetMapping("/get")
+    public ItemDTO get(){
         //BigDecimal basicPrice, Category category, List<Tag> tags, String name, Stock stock)
-        item.setDiscount(new Discount(5, new BigDecimal(20)));
-        return item;
+        return new ItemDTO(
+                new BigDecimal("200"),
+                new Discount(5, new BigDecimal(20)),
+                new LinkedHashSet<>(Collections.singletonList(new Category("programowanie w Java"))),
+                new LinkedHashSet<>(Arrays.asList(new Tag("SQL"), new Tag("Java"))),
+                "Książka o Javie",
+                new Stock(12),
+                new LinkedHashSet<>(Collections.singletonList(new Author("Wiktor Metelski","O autorze")))
+        );
     }
 
-    @GetMapping("getAll/")
+    @GetMapping("/getAll")
     public List<Item> getAll(){
         return itemRepositoryJpa.findAll();
     }
 
     @Transactional
-    @GetMapping(value = "delete/", params = "name")
+    @GetMapping(value = "/delete", params = "name")
     public void delete(@RequestParam String name){
         Item item = itemRepositoryJpa.getItemByName(name);
         itemRepositoryJpa.delete(item);

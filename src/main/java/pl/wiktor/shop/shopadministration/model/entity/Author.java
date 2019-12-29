@@ -1,22 +1,24 @@
 package pl.wiktor.shop.shopadministration.model.entity;
 
-
 import javax.persistence.*;
 
 @Entity
 @Table
-public class Category {
+public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(unique = true)
+    @Column
     private String name;
+    @Column
+    private String aboutAuthor;
 
-    public Category() {
+    public Author() {
     }
 
-    public Category(String name) {
+    public Author(String name, String aboutAuthor) {
         this.name = name;
+        this.aboutAuthor = aboutAuthor;
     }
 
     public int getId() {
@@ -35,11 +37,11 @@ public class Category {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+    public String getAboutAuthor() {
+        return aboutAuthor;
+    }
+
+    public void setAboutAuthor(String aboutAuthor) {
+        this.aboutAuthor = aboutAuthor;
     }
 }

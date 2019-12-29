@@ -1,23 +1,32 @@
 package pl.wiktor.shop.shopadministration.model.dto.request;
 
-import pl.wiktor.shop.shopadministration.model.entity.Discount;
-import pl.wiktor.shop.shopadministration.model.entity.Stock;
-import pl.wiktor.shop.shopadministration.model.entity.Tag;
-import pl.wiktor.shop.shopadministration.model.entity.Category;
+import pl.wiktor.shop.shopadministration.model.entity.*;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 
 public class ItemDTO {
     private int id;
+    private String name;
     private BigDecimal basicPrice;
     private Discount discount;
-    private Category category;
-    private List<Tag> tags;
-    private String name;
+    private Set<Category> categories;
+    private Set<Tag> tags;
     private Stock stock;
+    private Set<Author> authors;
 
     public ItemDTO() {
+    }
+
+    public ItemDTO(BigDecimal basicPrice, Discount discount, Set<Category> categories, Set<Tag> tags, String name, Stock stock, Set<Author> authors) {
+        this.name = name;
+        this.basicPrice = basicPrice;
+        this.discount = discount;
+        this.categories = categories;
+        this.tags = tags;
+        this.stock = stock;
+        this.authors = authors;
     }
 
     public int getId() {
@@ -26,6 +35,14 @@ public class ItemDTO {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public BigDecimal getBasicPrice() {
@@ -44,28 +61,20 @@ public class ItemDTO {
         this.discount = discount;
     }
 
-    public Category getCategory() {
-        return category;
+    public Set<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 
-    public List<Tag> getTags() {
+    public Set<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(Set<Tag> tags) {
         this.tags = tags;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Stock getStock() {
@@ -74,5 +83,13 @@ public class ItemDTO {
 
     public void setStock(Stock stock) {
         this.stock = stock;
+    }
+
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<Author> author) {
+        this.authors = author;
     }
 }

@@ -2,7 +2,6 @@ package pl.wiktor.shop.shopadministration.model.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Set;
 
 @Table(name = "item")
@@ -11,29 +10,31 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(unique = true)
+    private String name;
     @Column
     private BigDecimal basicPrice;
     @OneToOne(cascade = CascadeType.ALL)
     private Discount discount;
-    @ManyToOne
-    private Category category;
+    @ManyToMany
+    private Set<Category> categories;
     @ManyToMany
     private Set<Tag> tags;
-    @Column(unique = true)
-    private String name;
     @OneToOne(cascade = CascadeType.ALL)
     private Stock stock;
-
+    @ManyToMany
+    private Set<Author> authors;
 
     public Item() {
     }
 
-    public Item(BigDecimal basicPrice, Category category, Set<Tag> tags, String name, Stock stock) {
+    public Item(BigDecimal basicPrice, Set<Category> categories, Set<Tag> tags, String name, Stock stock, Set<Author> authors) {
         this.basicPrice = basicPrice;
-        this.category = category;
+        this.categories = categories;
         this.tags = tags;
         this.name = name;
         this.stock = stock;
+        this.authors = authors;
     }
 
     public void setDiscount(Discount discount) {
@@ -48,8 +49,8 @@ public class Item {
         return discount;
     }
 
-    public Category getCategory() {
-        return category;
+    public Set<Category> getCategories() {
+        return categories;
     }
 
     public String getName() {
@@ -72,8 +73,8 @@ public class Item {
         this.basicPrice = basicPrice;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 
     public void setTags(Set<Tag> tags) {
@@ -88,13 +89,25 @@ public class Item {
         this.stock = stock;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<Author> authors) {
+        this.authors = authors;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
                 "id=" + id +
                 ", basicPrice=" + basicPrice +
                 ", discount=" + discount +
-                ", category=" + category +
+                ", categories=" + categories +
                 ", tags=" + tags +
                 ", name='" + name + '\'' +
                 ", stock=" + stock +
