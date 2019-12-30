@@ -5,13 +5,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import pl.wiktor.shop.shopadministration.model.dto.request.AuthorDTO;
-import pl.wiktor.shop.shopadministration.model.dto.request.CategoryDTO;
 import pl.wiktor.shop.shopadministration.model.entity.Author;
-import pl.wiktor.shop.shopadministration.model.entity.Category;
 import pl.wiktor.shop.shopadministration.model.mapper.AuthorMapper;
-import pl.wiktor.shop.shopadministration.model.mapper.CategoryMapper;
 import pl.wiktor.shop.shopadministration.repository.AuthorRepositoryJpa;
-import pl.wiktor.shop.shopadministration.repository.CategoryRepositoryJpa;
 import pl.wiktor.shop.shopadministration.service.AuthorService;
 
 import javax.transaction.Transactional;
