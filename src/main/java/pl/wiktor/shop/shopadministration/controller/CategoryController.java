@@ -10,8 +10,8 @@ import pl.wiktor.shop.shopadministration.model.entity.Category;
 import java.util.List;
 
 public interface CategoryController {
-    ResponseEntity<String> addCategory(CategoryDTO categoryDTO);
-    ResponseEntity<String> editCategory(int oldCategory, CategoryDTO categoryDTO);
-    ResponseEntity<String> deleteCategory(int id);
+    ResponseEntity<String> add(CategoryDTO categoryDTO);
+    ResponseEntity<String> update(int oldCategory, CategoryDTO categoryDTO);
+    ResponseEntity<String> delete(int id);
     ResponseEntity<List<Category>> getAll();
 }

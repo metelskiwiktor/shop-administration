@@ -13,8 +13,10 @@ import pl.wiktor.shop.shopadministration.model.mapper.TagMapper;
 import pl.wiktor.shop.shopadministration.repository.TagRepositoryJpa;
 import pl.wiktor.shop.shopadministration.service.TagService;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional
 @Service
 public class TagServiceImpl implements TagService {
     private TagRepositoryJpa tagRepository;

@@ -31,7 +31,7 @@ public class CategoryServiceImpl implements CategoryService {
     public void edit(int idOldCategory, CategoryDTO categoryDTO) throws NullPointerException{
         Category category = categoryRepository.getOne(idOldCategory);
         category.setName(categoryDTO.getName());
-        categoryRepository.saveAndFlush(category);
+        categoryRepository.save(category);
     }
 
     public void delete(int id) throws EmptyResultDataAccessException {
