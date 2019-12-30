@@ -32,17 +32,17 @@ public class CategoryControllerImpl implements CategoryController {
     }
 
     @GetMapping(value = ADD, consumes = "application/json")
-    public ResponseEntity<String> addCategory(@RequestBody CategoryDTO categoryDTO) {
+    public ResponseEntity<String> add(@RequestBody CategoryDTO categoryDTO) {
         logger.info("Trying to add category = '{}'", categoryDTO);
 
         categoryService.add(categoryDTO);
 
-        logger.info("Category successful added");
+        logger.info("Category = '{}' successful added", categoryDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping(value = UPDATE + "{idOldCategory}", consumes = "application/json")
-    public ResponseEntity<String> editCategory(@PathVariable int idOldCategory, @RequestBody CategoryDTO categoryDTO) {
+    public ResponseEntity<String> update(@PathVariable int idOldCategory, @RequestBody CategoryDTO categoryDTO) {
         logger.info("Trying to edit category, old category id = '{}', new category = '{}'",
                 idOldCategory,
                 categoryDTO.getName()
@@ -57,8 +57,8 @@ public class CategoryControllerImpl implements CategoryController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value = DELETE + "{id}")
-    public ResponseEntity<String> deleteCategory(@PathVariable int id) {
+    @GetMapping(value = DELETE + "/{id}")
+    public ResponseEntity<String> delete(@PathVariable int id) {
         logger.info("Trying to delete category, id = '{}'", id);
 
         categoryService.delete(id);
