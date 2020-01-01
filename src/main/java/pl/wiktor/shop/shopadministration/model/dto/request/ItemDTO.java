@@ -92,4 +92,18 @@ public class ItemDTO {
     public void setAuthors(Set<Author> author) {
         this.authors = author;
     }
+
+    @Override
+    public String toString() {
+        return "ItemDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", basicPrice=" + basicPrice +
+                ", discount=" + discount +
+                ", categories=" + categories +
+                ", tags=" + tags +
+                ", stock=" + stock +
+                ", authors=" + authors +
+                '}';
+    }
 }

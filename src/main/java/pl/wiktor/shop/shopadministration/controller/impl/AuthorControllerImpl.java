@@ -61,7 +61,7 @@ public class AuthorControllerImpl implements AuthorController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value = DELETE + "{id}")
+    @GetMapping(DELETE + "{id}")
     public ResponseEntity<String> delete(@PathVariable int id){
         logger.info("Trying to delete author by id = '{}'", id);
 

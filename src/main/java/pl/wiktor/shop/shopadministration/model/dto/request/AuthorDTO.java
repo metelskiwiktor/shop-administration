@@ -38,4 +38,13 @@ public class AuthorDTO {
     public void setAboutAuthor(String aboutAuthor) {
         this.aboutAuthor = aboutAuthor;
     }
+
+    @Override
+    public String toString() {
+        return "AuthorDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", aboutAuthor='" + aboutAuthor + '\'' +
+                '}';
+    }
 }

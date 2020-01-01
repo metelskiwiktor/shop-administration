@@ -19,4 +19,12 @@ public class TagDTO {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "TagDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
